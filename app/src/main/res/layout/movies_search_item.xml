@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    card_view:cardBackgroundColor="@color/cardview_dark_background"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/search_movie_poster"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            tools:ignore="ContentDescription,RtlHardcoded"/>
+
+        <TextView
+            android:id="@+id/search_movie_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@id/search_movie_poster"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="20sp"
+            android:typeface="serif"
+            android:textAllCaps="true"
+            android:textColor="@color/pureWhite"/>
+
+        <ImageView
+            android:id="@+id/vote_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@id/search_movie_title"
+            android:layout_below="@id/search_movie_title"
+            app:srcCompat="@android:drawable/btn_star_big_on"
+            tools:ignore="ContentDescription"
+            android:textColor="@color/pureWhite"/>
+
+        <TextView
+            android:id="@+id/search_vote_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/vote_star"
+            android:textSize="22sp"
+            android:textColor="@color/pureWhite"/>
+
+        <TextView
+            android:id="@+id/search_release_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/pureWhite"/>
+
+        <TextView
+            android:id="@+id/search_release_date_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_toStartOf="@id/search_release_date"
+            android:text="@string/title_release_date"
+            android:textColor="@color/pureWhite"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+

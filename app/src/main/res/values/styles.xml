@@ -1,17 +1,47 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="MovieTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionMenuTextColor">@color/pureBlack</item>
     </style>
-    <style name="AppTheme.NoActionBar">
+
+    <style name="MovieTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="MovieTheme.ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/pureWhite</item>
+        <item name="colorControlNormal">@color/transparentBlack</item>
+        <item name="android:title">sdfafadsf</item>
+    </style>
+
+    <style name="MovieTheme.Holo.Light" parent="@android:style/Widget.Holo.Light"/>
+
+    <style name="MovieTheme.ButtonTextStyle">
+        <item name="android:textColor">@color/pureWhite</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:elevation" tools:targetApi="lollipop">7dp</item>
+    </style>
+
+    <style name="MovieTheme.ActionBar.TitleTextStyle"
+           parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/pureBlack</item>
+        <item name="android:titleTextColor">@color/pureBlack</item>
+        <item name="android:subtitleTextColor">@color/transparentBlack</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MovieTheme.ActionBar.SubTitleTextStyle"
+           parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/transparentBlack</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:typeface">serif</item>
+    </style>
 
 </resources>
