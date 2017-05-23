@@ -1,9 +1,12 @@
 package tmdb.walmart.interview.findmovies.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -22,6 +25,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import tmdb.walmart.interview.findmovies.FindMoviesActivity;
+import tmdb.walmart.interview.findmovies.MovieInfoActivity;
 import tmdb.walmart.interview.findmovies.R;
 import tmdb.walmart.interview.findmovies.manager.ScreenAppearanceManager;
 import tmdb.walmart.interview.findmovies.model.Movie;
@@ -32,9 +37,11 @@ import tmdb.walmart.interview.findmovies.model.Movie;
 
 public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.MovieHolder> {
     public static final String URL_PREFIX = "https://image.tmdb.org/t/p/original";
+    public static final String TAG_MOVIE = "MoviesListAdapteMovieInfo";
 
     private ArrayList<Movie> mMovies;
     private ScreenAppearanceManager mScreenManager;
+    private FragmentManager mFragmentManager;
     private Context mContext;
 
     public MoviesListAdapter(ArrayList<Movie> movies) {
@@ -42,6 +49,7 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.Mo
     }
 
     class MovieHolder extends RecyclerView.ViewHolder {
+        CardView mSearchMovieContainer;
         ImageView mMovieImage;
         TextView mMovieTitle;
         TextView mMovieVoteScore;
@@ -51,6 +59,7 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.Mo
             super(itemView);
             mContext = itemView.getContext();
             mScreenManager = new ScreenAppearanceManager(mContext);
+            mSearchMovieContainer = (CardView) itemView.findViewById(R.id.search_movie_containter);
             mMovieImage = (ImageView) itemView.findViewById(R.id.search_movie_poster);
             mMovieTitle = (TextView) itemView.findViewById(R.id.search_movie_title);
             mMovieVoteScore = (TextView) itemView.findViewById(R.id.search_vote_score);
@@ -66,25 +75,32 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.Mo
     }
 
     @Override
-    public void onBindViewHolder(final MoviesListAdapter.MovieHolder holder, int position) {
-        Movie movie = mMovies.get(position);
+    public void onBindViewHolder(MoviesListAdapter.MovieHolder holder, int position) {
+        final Movie movie = mMovies.get(position);
         holder.mMovieTitle.setText(movie.getTitle());
         holder.mMovieVoteScore.setText(movie.getVoteAverage());
         holder.mMovieReleaseDate.setText(movie.getReleaseDate());
+        holder.mSearchMovieContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MovieInfoActivity.class);
+                intent.putExtra(TAG_MOVIE, movie);
+                mContext.startActivity(intent);
+            }
+        });
         int width = mScreenManager.getScreenWidth();
         int length = mScreenManager.getScreenLength();
         String url = URL_PREFIX + movie.getPoster_path();
-        Picasso.with(mContext).load(url).centerCrop().resize(360, 540).into(holder
-                .mMovieImage, new Callback() {
+        final ImageView imageView = holder.mMovieImage;
+        Picasso.with(mContext).load(url).centerCrop().resize(360, 540).into(imageView, new Callback() {
             @Override
             public void onSuccess() {
-
             }
 
             @Override
             public void onError() {
                 Picasso.with(mContext).load(R.drawable.no_image_available).centerCrop().resize
-                        (360, 540).into(holder.mMovieImage);
+                        (360, 540).into(imageView);
             }
         });
     }
@@ -93,4 +109,6 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.Mo
     public int getItemCount() {
         return mMovies.size();
     }
+
+
 }

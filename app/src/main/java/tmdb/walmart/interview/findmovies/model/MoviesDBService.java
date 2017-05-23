@@ -36,7 +36,6 @@ public class MoviesDBService {
     private AsyncTask mAsyncTask;
     private String mDataError;
     private String mConnectionError;
-    private String mMovieName;
     private ProgressDialog mProgressDialog;
 
     public MoviesDBService(Context context, MoviesDBServiceCallback callback) {
@@ -44,8 +43,8 @@ public class MoviesDBService {
         mDBServiceCallback = callback;
     }
 
-    public void getInfo(final String movieName) {
-        mMovieName = movieName.replaceAll("[\\s]", "%20").toLowerCase();
+    public void getInfo(String movieName) {
+        movieName = movieName.replaceAll("[\\s]", "%20").toLowerCase();
         showProgressDialog(mContext);
         mAsyncTask = new AsyncTask<String, Void, String>() {
             @Override
@@ -87,7 +86,7 @@ public class MoviesDBService {
                     }
                 }
             }
-        }.execute(mMovieName);
+        }.execute(movieName);
     }
 
     private void showProgressDialog(Context context) {
@@ -98,7 +97,6 @@ public class MoviesDBService {
                 .OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(mContext, "sdfdsf", Toast.LENGTH_SHORT).show();
                 stopService();
             }
         });
@@ -106,7 +104,9 @@ public class MoviesDBService {
     }
 
     private void stopService() {
-        mAsyncTask.cancel(true);
+        if (mAsyncTask != null) {
+            mAsyncTask.cancel(true);
+        }
         mDBServiceCallback.onMoviesDBServiceFailed(mProgressDialog);
     }
 }

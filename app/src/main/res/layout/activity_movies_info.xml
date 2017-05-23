@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparentBlack"
+    tools:context=".MovieInfoActivity">
+
+    <TextView
+        android:id="@+id/info_movie_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:padding="10dp"
+        android:textAllCaps="true"
+        android:textColor="@color/pureWhite"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="serif"/>
+
+    <TextView
+        android:id="@+id/info_movie_overview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/info_movie_title"
+        android:layout_marginTop="5dp"
+        android:padding="10dp"
+        android:textColor="@color/pureWhite"
+        android:textSize="15sp"
+        android:textStyle="italic"/>
+
+    <ImageView
+        android:id="@+id/info_movie_poster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/info_movie_overview"
+        android:padding="10dp"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/info_vote_count_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/info_movie_poster"
+        android:layout_toEndOf="@id/info_movie_poster"
+        android:padding="5dp"
+        android:text="@string/title_vote_count"
+        android:textColor="@color/pureWhite"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/info_vote_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/info_vote_count_title"
+        android:layout_toEndOf="@id/info_vote_count_title"
+        android:contentDescription=""
+        android:padding="5dp"
+        android:textColor="@color/pureWhite"
+        android:textSize="20sp"/>
+
+    <ImageView
+        android:id="@+id/info_movie_star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/info_vote_count_title"
+        android:layout_alignStart="@id/info_vote_count_title"
+        android:padding="5dp"
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/info_movie_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/info_vote_count_title"
+        android:layout_toEndOf="@id/info_movie_star"
+        android:padding="5dp"
+        android:textColor="@color/pureWhite"
+        android:textSize="20sp"/>
+</RelativeLayout>

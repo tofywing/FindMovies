@@ -5,12 +5,12 @@
     <string name="button_submit">Submit</string>
     <string name="edit_search_hint">Please type your movie here.</string>
     <string name="title_release_date">Release date:</string>
-    <string name="title_vote_count">Vote:</string>
+    <string name="title_vote_count">Vote</string>
     <string name="server_data_error">Server error,no data is downloaded.</string>
     <string name="server_connection_error">Server error, the server connection is broken.</string>
     <string name="action_bar_title">Find Your Movies</string>
-    <string name="action_bar_comment">Click the scope to start your search.</string>
+    <string name="action_bar_subtitle">Click the scope to start your search.</string>
     <string name="action_bar_search_title">Search</string>
-    <string name="item_title">Title</string>
     <string name="movies_loading">Loading…</string>
+    <string name="menu_settings">Settings</string>
 </resources>

@@ -15,12 +15,15 @@
         <activity
             android:name=".FindMoviesActivity"
             android:label="@string/app_name"
-            android:theme="@style/MovieTheme.NoActionBar"
-            android:parentActivityName=".FindMoviesActivity">
+            android:parentActivityName=".FindMoviesActivity"
+            android:theme="@style/MovieTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MovieInfoActivity"
+            android:parentActivityName=".FindMoviesActivity"/>
     </application>
 </manifest>

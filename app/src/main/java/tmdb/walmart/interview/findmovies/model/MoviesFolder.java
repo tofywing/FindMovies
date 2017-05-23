@@ -43,7 +43,7 @@ public class MoviesFolder implements Parcelable, ParseData {
         JSONArray jsonArray = object.optJSONArray("results");
         int size = object.optInt("total_results");
         mMovies = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < Math.min(20, size); i++) {
             Movie movie = new Movie();
             try {
                 movie.parseData(jsonArray.getJSONObject(i));

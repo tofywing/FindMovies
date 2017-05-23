@@ -49,17 +49,9 @@ public class FindMoviesActivity extends AppCompatActivity implements MoviesDBSer
         setContentView(R.layout.activity_find_movies);
         mFragmentManager = getSupportFragmentManager();
         mEditMoviesSearch = (EditText) findViewById(R.id.edit_movies_search);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.post(new Runnable() {
-            @Override
-            public void run() {
-                mActionBar = getSupportActionBar();
-                if (mActionBar != null) {
-                    getSupportActionBar().setTitle(getString(R.string.action_bar_title));
-                    getSupportActionBar().setSubtitle(getString(R.string.action_bar_comment));
-                }
-            }
-        });
+        mToolbar = (Toolbar) findViewById(R.id.search_toolbar);
+        mToolbar.setTitle(R.string.action_bar_title);
+        mToolbar.setSubtitle(R.string.action_bar_subtitle);
         setSupportActionBar(mToolbar);
         mEditMoviesSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -107,18 +99,23 @@ public class FindMoviesActivity extends AppCompatActivity implements MoviesDBSer
                     hideSoftKeyBoard();
                 }
             }
-            mActionBar.setDisplayShowTitleEnabled(false);
+            mActionBar = getSupportActionBar();
+            if (mActionBar != null) {
+                mActionBar.setDisplayShowTitleEnabled(false);
+            }
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onMoviesDBServiceSuccess(ProgressDialog dialog, MoviesFolder folder) {
-        mMoviesSearchFragment = MoviesSearchFragment.newInstance(folder);
-        if (!mMoviesSearchFragment.isAdded()) {
-            mFragmentManager.beginTransaction().add(R.id.fragment_movies_search_container,
-                    mMoviesSearchFragment).commitAllowingStateLoss();
+        mMoviesSearchFragment = mFragmentManager.findFragmentById(R.id.fragment_movies_search_container);
+        if (mMoviesSearchFragment != null) {
+            mFragmentManager.beginTransaction().remove(mMoviesSearchFragment).commit();
         }
+        mMoviesSearchFragment = MoviesSearchFragment.newInstance(folder);
+        mFragmentManager.beginTransaction().add(R.id.fragment_movies_search_container,
+                mMoviesSearchFragment).commit();
         dialog.dismiss();
     }
 
@@ -126,7 +123,6 @@ public class FindMoviesActivity extends AppCompatActivity implements MoviesDBSer
     public void onMoviesDBServiceFailed(ProgressDialog dialog) {
         Log.d(TAG, "onMoviesDBServiceFailed");
         dialog.dismiss();
-
     }
 
     @Override
