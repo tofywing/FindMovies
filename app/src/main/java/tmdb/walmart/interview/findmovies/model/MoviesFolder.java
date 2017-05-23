@@ -18,7 +18,7 @@ public class MoviesFolder implements Parcelable, ParseData {
     private static final String TAG = "MoviesFolder";
     private ArrayList<Movie> mMovies;
 
-    MoviesFolder() {
+    public MoviesFolder() {
 
     }
 

@@ -21,7 +21,7 @@ public class ScreenAppearanceManager {
     public int screenLength;
 
     private SharedPreferences mPrefs;
-    private Context mContext;
+    Context mContext;
 
     public ScreenAppearanceManager(Context context) {
         mPrefs = context.getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
@@ -40,11 +40,13 @@ public class ScreenAppearanceManager {
     }
 
     public int getScreenWidth() {
-        return screenWidth = mPrefs.getInt(SCREEN_WIDTH, -1);
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
+        return screenWidth = prefs.getInt(SCREEN_WIDTH, -1);
     }
 
     public int getScreenLength() {
-        return screenLength = mPrefs.getInt(SCREEN_LENGTH, -1);
+        SharedPreferences prefs = mContext.getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE);
+        return screenLength = prefs.getInt(SCREEN_LENGTH, -1);
     }
 }
 

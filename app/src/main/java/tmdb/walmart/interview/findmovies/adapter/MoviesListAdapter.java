@@ -41,7 +41,6 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.Mo
 
     private ArrayList<Movie> mMovies;
     private ScreenAppearanceManager mScreenManager;
-    private FragmentManager mFragmentManager;
     private Context mContext;
 
     public MoviesListAdapter(ArrayList<Movie> movies) {
@@ -54,6 +53,8 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.Mo
         TextView mMovieTitle;
         TextView mMovieVoteScore;
         TextView mMovieReleaseDate;
+        int screenLength;
+        int screenWidth;
 
         MovieHolder(View itemView) {
             super(itemView);
@@ -64,6 +65,8 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.Mo
             mMovieTitle = (TextView) itemView.findViewById(R.id.search_movie_title);
             mMovieVoteScore = (TextView) itemView.findViewById(R.id.search_vote_score);
             mMovieReleaseDate = (TextView) itemView.findViewById(R.id.search_release_date);
+            screenLength = mScreenManager.getScreenLength();
+            screenWidth = mScreenManager.getScreenWidth();
         }
     }
 
@@ -75,7 +78,7 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.Mo
     }
 
     @Override
-    public void onBindViewHolder(MoviesListAdapter.MovieHolder holder, int position) {
+    public void onBindViewHolder(final MoviesListAdapter.MovieHolder holder, int position) {
         final Movie movie = mMovies.get(position);
         holder.mMovieTitle.setText(movie.getTitle());
         holder.mMovieVoteScore.setText(movie.getVoteAverage());
@@ -88,21 +91,21 @@ public class MoviesListAdapter extends RecyclerView.Adapter<MoviesListAdapter.Mo
                 mContext.startActivity(intent);
             }
         });
-        int width = mScreenManager.getScreenWidth();
-        int length = mScreenManager.getScreenLength();
         String url = URL_PREFIX + movie.getPoster_path();
         final ImageView imageView = holder.mMovieImage;
-        Picasso.with(mContext).load(url).centerCrop().resize(360, 540).into(imageView, new Callback() {
-            @Override
-            public void onSuccess() {
-            }
+        final int refs = (int) (holder.screenWidth * 0.25);
+        Picasso.with(mContext).load(url).centerCrop().resize(refs, (int) (refs * 1.5)).into
+                (imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                    }
 
-            @Override
-            public void onError() {
-                Picasso.with(mContext).load(R.drawable.no_image_available).centerCrop().resize
-                        (360, 540).into(imageView);
-            }
-        });
+                    @Override
+                    public void onError() {
+                        Picasso.with(mContext).load(R.drawable.no_image_available).centerCrop()
+                                .resize(refs, (int) (refs * 1.5)).into(imageView);
+                    }
+                });
     }
 
     @Override
